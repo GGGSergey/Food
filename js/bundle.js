@@ -211,14 +211,14 @@ function cards() {
       }
       this.classes = classes;
       this.parent = document.querySelector(parentSelector);
-      this.transfer = 27;
-      this.changeToUAH();
+      this.transfer = 65;
+      this.changeToRub();
     }
-    changeToUAH() {
+    changeToRub() {
       this.price = this.price * this.transfer;
     }
     render() {
-      const element = document.createElement('div');
+      const element = document.createElement("div");
       if (this.classes.length === 0) {
         this.classes = "menu__item";
         element.classList.add(this.classes);
@@ -232,13 +232,13 @@ function cards() {
                 <div class="menu__item-divider"></div>
                 <div class="menu__item-price">
                     <div class="menu__item-cost">Цена:</div>
-                    <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+                    <div class="menu__item-total"><span>${this.price}</span> руб/день</div>
                 </div>
             `;
       this.parent.append(element);
     }
   }
-  Object(_services_services__WEBPACK_IMPORTED_MODULE_0__["getResource"])('http://localhost:3000/menu').then(data => {
+  Object(_services_services__WEBPACK_IMPORTED_MODULE_0__["getResource"])("http://localhost:3000/menu").then(data => {
     data.forEach(_ref => {
       let {
         img,
@@ -420,17 +420,17 @@ function slider(_ref) {
     total.textContent = slides.length;
     current.textContent = slideIndex;
   }
-  slidesField.style.width = 100 * slides.length + '%';
-  slidesField.style.display = 'flex';
-  slidesField.style.transition = '0.5s all';
-  slidesWrapper.style.overflow = 'hidden';
+  slidesField.style.width = 100 * slides.length + "%";
+  slidesField.style.display = "flex";
+  slidesField.style.transition = "0.5s all";
+  slidesWrapper.style.overflow = "hidden";
   slides.forEach(slide => {
     slide.style.width = width;
   });
-  slider.style.position = 'relative';
-  const indicators = document.createElement('ol'),
+  slider.style.position = "relative";
+  const indicators = document.createElement("ol"),
     dots = [];
-  indicators.classList.add('carousel-indicators');
+  indicators.classList.add("carousel-indicators");
   indicators.style.cssText = `
         position: absolute;
         right: 0;
@@ -445,8 +445,8 @@ function slider(_ref) {
     `;
   slider.append(indicators);
   for (let i = 0; i < slides.length; i++) {
-    const dot = document.createElement('li');
-    dot.setAttribute('data-slide-to', i + 1);
+    const dot = document.createElement("li");
+    dot.setAttribute("data-slide-to", i + 1);
     dot.style.cssText = `
             box-sizing: content-box;
             flex: 0 1 auto;
@@ -468,7 +468,7 @@ function slider(_ref) {
     indicators.append(dot);
     dots.push(dot);
   }
-  next.addEventListener('click', () => {
+  next.addEventListener("click", () => {
     if (offset == deleteNotDigits(width) * (slides.length - 1)) {
       offset = 0;
     } else {
@@ -488,7 +488,7 @@ function slider(_ref) {
     dots.forEach(dot => dot.style.opacity = ".5");
     dots[slideIndex - 1].style.opacity = 1;
   });
-  prev.addEventListener('click', () => {
+  prev.addEventListener("click", () => {
     if (offset == 0) {
       offset = deleteNotDigits(width) * (slides.length - 1);
     } else {
@@ -509,8 +509,8 @@ function slider(_ref) {
     dots[slideIndex - 1].style.opacity = 1;
   });
   dots.forEach(dot => {
-    dot.addEventListener('click', e => {
-      const slideTo = e.target.getAttribute('data-slide-to');
+    dot.addEventListener("click", e => {
+      const slideTo = e.target.getAttribute("data-slide-to");
       slideIndex = slideTo;
       offset = deleteNotDigits(width) * (slideTo - 1);
       slidesField.style.transform = `translateX(-${offset}px)`;
@@ -524,7 +524,7 @@ function slider(_ref) {
     });
   });
   function deleteNotDigits(str) {
-    return +str.replace(/\D/g, '');
+    return +str.replace(/[^0-9.,]/g, "");
   }
 }
 /* harmony default export */ __webpack_exports__["default"] = (slider);
